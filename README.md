@@ -57,6 +57,8 @@ Run dwm with `startx` on tty.
 
 ![](images/desktop-screencapture2.png)
 
+![](images/desktop-screencapture3.png)
+
 
 # Testing Status
 Tested on my Computer (Arch Linux).
