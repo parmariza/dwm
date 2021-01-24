@@ -59,7 +59,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 /* custom shorcut */
-static const char *file_manager[] = { "dolphin" };
+// static const char *file_manager[] = { "dolphin" };  // note you can remove this if you not using dolphin (file manager)
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -97,8 +97,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
     // Custom key
-    { 0,    						XK_Print,  spawn,          SHCMD("scrot -p -q 100 ~/Pictures/%Y-%m-%d-%T-screenshot.png") },
-    { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = file_manager } },
+    // { 0,    						XK_Print,  spawn,          SHCMD("scrot -p -q 100 ~/Pictures/%Y-%m-%d-%T-screenshot.png") },
+    // { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = file_manager } },
 };
 
 /* button definitions */
