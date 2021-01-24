@@ -49,4 +49,4 @@ exec dwm```
 Tested on my Computer (Arch Linux).
 
 All set. Reboot your computer.
-Run dwm with `startx` on tty
+Run dwm with `startx` on tty.
