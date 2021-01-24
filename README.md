@@ -49,6 +49,12 @@ exec dwm
 All set. Reboot your computer.
 Run dwm with `startx` on tty.
 
+# Screencapture
+![](images/desktop-screencaputure.png)
+
+![](images/desktop-screencapture2.png)
+
+
 # Testing Status
 Tested on my Computer (Arch Linux).
 
