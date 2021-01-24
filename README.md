@@ -1,5 +1,6 @@
 # dwm
 Parma's Patched dynamic window manager from suckless.
+
 For original files (unpatched) visit https://dwm.suckless.org/
 
 # Installation
