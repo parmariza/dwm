@@ -16,7 +16,8 @@ sudo make install
 ```
 
 Create file `.xinitrc` in your home directory.
-```dte() {
+```
+dte() {
     dte="$(date +"%d-%b-%Y %H:%M")"
     echo -e "$dte"
 }
