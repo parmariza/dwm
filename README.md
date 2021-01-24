@@ -47,3 +47,6 @@ exec dwm```
 
 # Testing Status
 Tested on my Computer (Arch Linux).
+
+All set. Reboot your computer.
+Run dwm with `startx` on tty
