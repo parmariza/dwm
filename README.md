@@ -43,7 +43,8 @@ while true; do
 done &
 
 # Run dwm
-exec dwm```
+exec dwm
+```
 
 # Testing Status
 Tested on my Computer (Arch Linux).
