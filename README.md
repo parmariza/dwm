@@ -59,6 +59,7 @@ Run dwm with `startx` on tty.
 
 ![](images/desktop-screencapture3.png)
 
+For fonts download from https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 
 # Testing Status
 Tested on my Computer (Arch Linux).
