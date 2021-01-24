@@ -33,7 +33,7 @@ battery() {
 }
 
 statusbar() {
-    statusbar="$(mem) | Parma | $(battery) | $(dte) "
+    statusbar="$(mem) | <change_this> | $(battery) | $(dte) "
     echo -e "$statusbar"
 }
 
