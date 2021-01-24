@@ -3,6 +3,8 @@ Parma's Patched dynamic window manager.
 
 # Installation
 First, install some packages.
+
+> Arch Linux
 `sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit`
 
 Then, create your own folder for dwm
