@@ -64,5 +64,5 @@ Run dwm with `startx` on tty.
 Download fonts from https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf **(MesloLGS NF)**
 
 # Testing Status
-Tested on my Computer (Arch Linux).
+Tested on Arch Linux.
 
