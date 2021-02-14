@@ -24,6 +24,7 @@ run on terminal: sudo make install
 
 ## Configured .xinitrc
 put .xinitrc file in your home directory
+`cp xinitrc ~/.xinitrc`
 
 
 Running dwm default xinitrc
