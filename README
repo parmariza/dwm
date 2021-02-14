@@ -1,7 +1,8 @@
 dwm - dynamic window manager
-============================
-dwm is an extremely fast, small, and dynamic window manager for X.
-
+----------------------------
+dwm is an extremely fast, small, and dynamic window manager.
+this dwm is configured by Parma.
+for original dwm visit: [Original dwm](https://dwm.suckless.org/)
 
 Requirements
 ------------
@@ -10,13 +11,8 @@ In order to build dwm you need the Xlib header files.
 
 Installation
 ------------
-Edit config.mk to match your local setup (dwm is installed into
-the /usr/local namespace by default).
-
-Afterwards enter the following command to build and install dwm (if
-necessary as root):
-
-    make clean install
+create directory for some dwm's files.
+run on terminal: sudo make install
 
 
 Running dwm
