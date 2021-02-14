@@ -4,6 +4,14 @@ dwm is an extremely fast, small, and dynamic window manager.
 this dwm is configured by Parma.
 for original dwm visit: [Original dwm](https://dwm.suckless.org/)
 
+Images
+------
+![](images/image1.png)
+
+![](images/image2.png)
+
+![](images/image3.png)
+
 Requirements
 ------------
 In order to build dwm you need the Xlib header files.
