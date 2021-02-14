@@ -23,7 +23,7 @@ create directory for some dwm's files.
 run on terminal: sudo make install
 
 ## Configured .xinitrc
-------------------
+## ------------------
 put .xinitrc file in your home directory
 
 
