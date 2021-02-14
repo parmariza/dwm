@@ -4,7 +4,7 @@ dwm is an extremely fast, small, and dynamic window manager.
 
 this dwm is configured by Parma.
 
-for original dwm visit: [Original dwm](https://dwm.suckless.org/)
+for original dwm visit: [dynamic window manager - suckless.org](https://dwm.suckless.org/)
 
 Images
 ------
