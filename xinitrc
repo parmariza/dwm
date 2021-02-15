@@ -35,7 +35,7 @@ kernel_release() {
 }
 
 statusbar() {
-    statusbar="$(mem) | $(kernel_release) | Parma | $(battery2)% $(datetime) "
+    statusbar="$(mem) | $(kernel_release) | your_name | $(battery2)% $(datetime) "
     echo -e "$statusbar"
 }
 
