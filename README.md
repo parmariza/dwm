@@ -22,12 +22,18 @@ Requirements
 In order to build dwm you need the Xlib header files.
 
 
+## Font
+---------
+Nerd font: [link](https://github.com/ryanoasis/nerd-fonts)
+
+
 Installation
 ------------
 create directory for some dwm's files.
 run on terminal: sudo make install
 
 ## Configured .xinitrc
+----------------------
 put .xinitrc file in your home directory
 `cp xinitrc ~/.xinitrc`
 
