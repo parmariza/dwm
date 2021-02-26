@@ -24,7 +24,7 @@ In order to build dwm you need the Xlib header files.
 
 ## Font
 ---------
-Nerd font: [link](https://github.com/ryanoasis/nerd-fonts)
+Nerd font: [click here](https://github.com/ryanoasis/nerd-fonts)
 
 
 Installation
