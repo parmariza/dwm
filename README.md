@@ -9,7 +9,7 @@ for original dwm visit: [dynamic window manager - suckless.org](https://dwm.suck
 Images
 ------
 ![](images/image1.png)
-wallpaper source: [click here](https://wall.alphacoders.com/big.php?i=744900)
+wallpaper source: [click here](https://wallpapersafari.com/w/JBTfdC)
 
 ![](images/image2.png)
 
