@@ -20,12 +20,13 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#4b70b4";
-static const char col_border[]      = "#daf1ef";
+static const char col_border[]      = "#EDF1FF";
+static const char col_border2[]     = "#939597";
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][4]      = {
 	/*               fg         bg         border       float */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2,   col_gray2 },
+	[SchemeNorm] = { col_gray3, col_gray1, col_border2,   col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_border,  col_cyan },
 };
 static const unsigned int alphas[][3]      = {
@@ -35,12 +36,13 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char *const autostart[] = {
-	"picom", "-b", NULL,
+"picom", "-b", NULL,
+	/* "/usr/bin/emacs", "--daemon", "&", NULL, */
 	NULL /* terminate */
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "₁", "₂", "₃", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -60,7 +62,7 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[T]",      tile },    /* first entry is default. default icon is [] */
+	{ "[T]",      tile },    /* first entry is default. default icon is []= */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 };
@@ -82,13 +84,17 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 
 /* brightness control */
-static const char *brightnessup[] = { "brightnessctl", "set", "3%+", NULL };
-static const char *brightnessdown[] = { "brightnessctl", "--min-value=100", "set", "3%-", NULL };
+static const char *brightnessup[] = { "brightnessctl", "set", "2%+", NULL };
+static const char *brightnessdown[] = { "brightnessctl", "--min-value=100", "set", "2%-", NULL };
 
 /* volume control */
-static const char *volumeup[] = { "pamixer", "--unmute", "--increase", "3", NULL };
-static const char *volumedown[] = { "pamixer", "--decrease", "3", NULL };
-static const char *volumemute[] = { "pamixer", "--mute", NULL };
+static const char *volumeup[] = { "pamixer", "--unmute", "--increase", "4", NULL };
+static const char *volumedown[] = { "pamixer", "--decrease", "4", NULL };
+static const char *volumemute[] = { "pamixer", "--toggle-mute", NULL };
+
+/* redshift warm color */
+static const char *warm_inc[] = { "redshift", "-O", "5000K", NULL };
+static const char *warm_off[] = { "redshift", "-x", NULL };
 
 /* custom shorcut commands */
 static const char screencapture[] = "scrot -q 100 ~/Pictures/Screencapture/%Y-%m-%d-%H.%M-screenshot.png";
@@ -96,6 +102,9 @@ static const char *file_manager[] = { "thunar", NULL };
 static const char *qb[] = { "qutebrowser", NULL };
 static const char *emacs[] = { "emacs", NULL };
 static const char *pavucontrol[] = { "pavucontrol", NULL };
+
+/* nextprev tags */
+#include "nextprevtag.c"
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -138,6 +147,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ Mod4Mask,                     XK_n,      view_adjacent,  { .i = +1 } },
+	{ Mod4Mask,                     XK_b,      view_adjacent,  { .i = -1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -155,6 +166,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = pavucontrol } },
 	{ 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = brightnessup } },
 	{ 0,          XF86XK_MonBrightnessDown,    spawn,          {.v = brightnessdown } },
+	{ ShiftMask,  XF86XK_MonBrightnessUp,      spawn,          {.v = warm_inc } },
+	{ ShiftMask,  XF86XK_MonBrightnessDown,    spawn,          {.v = warm_off } },
 	{ 0,          XF86XK_AudioRaiseVolume,     spawn,          {.v = volumeup } },
 	{ 0,          XF86XK_AudioLowerVolume,     spawn,          {.v = volumedown } },
 	{ 0,          XF86XK_AudioMute,            spawn,          {.v = volumemute } },
@@ -175,5 +188,7 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTagBar,            0,              Button4,        view_adjacent,  { .i = -1 } },
+	{ ClkTagBar,            0,              Button5,        view_adjacent,  { .i = +1 } },
 };
 

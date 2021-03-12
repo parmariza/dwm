@@ -9,7 +9,7 @@ for original dwm visit: [dynamic window manager - suckless.org](https://dwm.suck
 Images
 ------
 ![](images/image1.png)
-wallpaper source: [click here for wallpapers](https://wallpapersafari.com/w/JBTfdC)
+wallpaper source: [click here for wallpaper](https://unsplash.com/photos/uvNWlmKuXS4)
 
 ![](images/image2.png)
 
@@ -24,7 +24,7 @@ In order to build dwm you need the Xlib header files.
 
 ## Font
 ---------
-Nerd font: [click here for fonts](https://github.com/ryanoasis/nerd-fonts)
+Nerd font: [click here for nerd-fonts](https://github.com/ryanoasis/nerd-fonts)
 
 
 Installation

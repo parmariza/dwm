@@ -13,20 +13,29 @@ mem() {
     echo -e "$mem"
 }
 
-battery() {
+battery_cat() {
     battery="$(cat /sys/class/power_supply/BAT0/capacity)%"
-    echo -e "$battery"
+    echo -e "$battery_cat"
 }
 
-battery2() {
-	battery2=`acpi | grep 'Battery 0' | grep -oP '(?<=, )\d+(?=%)'`
+battery() {
+    battery=`acpi | grep 'Battery 0' | grep -oP '(?<=, )\d+(?=%)'`
+    status=`acpi -b | grep 'Battery 0' | sed 's/.*: \([a-zA-Z]*\),.*/\1/gi'`
 
-	if [ "$battery2" -le 25 ]
-	then
-		echo -e "Warning: $battery2"
-	else
-		echo -e "$battery2"
-	fi
+    if [ "$battery" -le 25 ] && [ "$status" == 'Discharging' ]
+    then
+        if [ "$battery" -le 15 ]
+        then
+            echo -e "Battery Very Low, Warning: $battery"
+        else
+            echo -e "Warning: $battery"
+        fi
+    elif [ "$status" == 'Charging' ]
+    then
+        echo -e " $battery"
+    else
+        echo -e "$battery"
+    fi
 }
 
 kernel_release() {
@@ -35,7 +44,7 @@ kernel_release() {
 }
 
 statusbar() {
-    statusbar="$(mem) | $(kernel_release) | Parma | $(battery2)% $(datetime) "
+    statusbar="$(mem) | $(kernel_release) | <username> | $(battery)% $(datetime) "
     echo -e "$statusbar"
 }
 
@@ -46,8 +55,8 @@ while true; do
 done &
 
 # Wallpaper
-# feh --bg-scale ~/Pictures/Wallpapers/alena-aenami-quiet-1px.jpg
-# feh --bg-scale ~/path/wallpapers_dwt1/0126.jpg
+# feh --bg-fill <wallpaper-path>
+# feh --bg-fill <wallpaper-path>
 
 # Export something
 # export BROWSER=/usr/bin/google-chrome-stable
@@ -55,6 +64,9 @@ done &
 
 # deleted command
 # remove dbus-launch 
+
+# Autostart picom compositor
+# <path>
 
 # Run dwm
 exec dwm
