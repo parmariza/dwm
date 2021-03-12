@@ -6,7 +6,7 @@ this dwm is configured by Parma.
 
 for original dwm visit (special thanks): [dynamic window manager - suckless.org](https://dwm.suckless.org/)
 
-Some patches for dwm (special thanks): [dwm patch](https://dwm.suckless.org/patches/)
+Some patches for dwm (special thanks): [dwm patch - suckless.org](https://dwm.suckless.org/patches/)
 
 Images
 ------
