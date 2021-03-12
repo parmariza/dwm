@@ -14,6 +14,7 @@ Images
 wallpaper source: [click here for wallpaper](https://unsplash.com/photos/uvNWlmKuXS4)
 
 ![](images/image2.png)
+text editor: [doom emacs](https://github.com/hlissner/doom-emacs)
 
 ![](images/image3.png)
 
