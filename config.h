@@ -19,7 +19,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#4b70b4";
+static const char col_cyan[]        = "#0074D9";
 static const char col_border[]      = "#EDF1FF";
 static const char col_border2[]     = "#939597";
 static const unsigned int baralpha = 0xd0;
@@ -36,9 +36,9 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char *const autostart[] = {
-"picom", "-b", NULL,
+    "picom", "-b", NULL,
 	/* "/usr/bin/emacs", "--daemon", "&", NULL, */
-	NULL /* terminate */
+	NULL, /* terminate */
 };
 
 /* tagging */
