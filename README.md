@@ -11,7 +11,7 @@ Some patches for dwm (special thanks): [dwm patch - suckless.org](https://dwm.su
 Images
 ------
 ![](images/image1.png)
-wallpaper source: [click here for wallpaper](https://unsplash.com/photos/AzfObt86MK8)
+wallpaper source: [click here for wallpaper](https://unsplash.com/photos/_rSTL_9eBAE)
 
 ![](images/image2.png)
 text editor: [doom emacs](https://github.com/hlissner/doom-emacs)
