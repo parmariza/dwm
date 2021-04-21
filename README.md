@@ -13,10 +13,10 @@ Images
 ![](images/image1.png)
 wallpaper source: [click here for wallpaper](https://unsplash.com/photos/MKXyRm-pK50)
 
-![](images/image2.png)
+![](images/image3.png)
 dmenu: [suckless - dmenu](https://tools.suckless.org/dmenu/)
 
-![](images/image3.png)
+![](images/image2.png)
 text editor: [doom emacs](https://github.com/hlissner/doom-emacs)
 
 ![](images/image4.png)
