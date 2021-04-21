@@ -13,17 +13,16 @@ static const unsigned int gappov    = 10;       /* vert outer gap between window
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "MesloLGS NF:size=10" };
+static const char *fonts[]          = { "MesloLGM Nerd Font:size=9" };
 static const char dmenufont[]       = "MesloLGS NF:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-/* static const char col_cyan[]        = "#366b9e"; */
-static const char col_cyan[]        = "#5c5c5c";
-static const char col_border[]      = "#39CCCC";
+static const char col_cyan[]        = "#056b19";    /* # top bar color # default is blue (#05386b) */
+static const char col_border[]      = "#39cc6f";
 static const char col_border2[]     = "#939597";
-static const char dmenu_color[]     = "#2ba64c";
+static const char dmenu_color[]     = "#805442";    /* # dmenu color # default is green (#2ba64c) */
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][4]      = {
@@ -39,6 +38,7 @@ static const unsigned int alphas[][3]      = {
 
 static const char *const autostart[] = {
     "picom", "-b", NULL,
+    "dunst", NULL,
 	/* "/usr/bin/emacs", "--daemon", "&", NULL, */
 	NULL, /* terminate */
 };

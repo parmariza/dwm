@@ -11,7 +11,7 @@ Some patches for dwm (special thanks): [dwm patch - suckless.org](https://dwm.su
 Images
 ------
 ![](images/image1.png)
-wallpaper source: [click here for wallpaper](https://unsplash.com/photos/_rSTL_9eBAE)
+wallpaper source: [click here for wallpaper](https://unsplash.com/photos/MKXyRm-pK50)
 
 ![](images/image2.png)
 dmenu: [suckless - dmenu](https://tools.suckless.org/dmenu/)
@@ -20,16 +20,15 @@ dmenu: [suckless - dmenu](https://tools.suckless.org/dmenu/)
 text editor: [doom emacs](https://github.com/hlissner/doom-emacs)
 
 ![](images/image4.png)
+file manager: [thunar](https://docs.xfce.org/xfce/thunar/start)
 
 Requirements
 ------------
 In order to build dwm you need the Xlib header files.
 
-
 ## Font
 ---------
 Nerd font: [click here for nerd-fonts](https://github.com/ryanoasis/nerd-fonts)
-
 
 Installation
 ------------
@@ -42,7 +41,7 @@ put .xinitrc file in your home directory
 `cp xinitrc ~/.xinitrc`
 
 
-Running dwm default xinitrc
+Running dwm (default xinitrc)
 ---------------------------
 Add the following line to your .xinitrc to start dwm using startx:
 

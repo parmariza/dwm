@@ -4,69 +4,97 @@ export AWT_TOOLKIT=MToolkit
 # wmname LG3D
 
 datetime() {
-    datetime="$(date +"%a, %b %d %H:%M")"
-    echo -e "$datetime"
+    local DATETIME="$(date +"%a %b %d %H:%M")"
+    echo " ${DATETIME}"
 }
 
 mem() {
-    mem=`free | awk '/Mem/ {printf "%d/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
-    echo -e "$mem"
-}
-
-battery_cat() {
-    battery="$(cat /sys/class/power_supply/BAT0/capacity)%"
-    echo -e "$battery_cat"
+    local MEM=$(free -m | awk '/Mem/ {printf "%d/%d MiB\n", $3, $2}')
+    echo " ${MEM}"
 }
 
 battery() {
-    battery=`acpi | grep 'Battery 0' | grep -oP '(?<=, )\d+(?=%)'`
-    status=`acpi -b | grep 'Battery 0' | sed 's/.*: \([a-zA-Z]*\),.*/\1/gi'`
+    local BATTERY=$(acpi -b | awk '/Battery 0/ {print substr($4, 1, length($4) - 2)}')
+    local STATUS=$(acpi -b | awk '/Battery 0/ {print substr($3, 1, length($3) - 1)}')
 
-    if [ "$battery" -le 25 ] && [ "$status" == 'Discharging' ]
+    if [[ "${BATTERY}" -le 25 ]] && [[ "${STATUS}" = 'Discharging' ]]
     then
-        if [ "$battery" -le 15 ]
+
+        if [[ "${BATTERY}" -le 15 ]]
         then
-            echo -e "Battery Very Low, Warning: $battery"
+            echo "Battery Very Low, Warning:  ${BATTERY}"
+            notify-send -u critical -t 15000 " Battery under 15%" "You need to plug the power adapter into your computer"
         else
-            echo -e "Warning: $battery"
+            echo "Warning:  ${BATTERY}"
+            notify-send " Battery under 25%"
         fi
-    elif [ "$status" == 'Charging' ]
+
+    elif [[ "${STATUS}" = 'Charging' ]]
     then
-        echo -e " $battery"
+
+        if [[ "$BATTERY" -ge 94 ]]
+        then
+            echo " ${BATTERY}"
+            notify-send -u low  -t 15000 " Fully Charged" "Today at $(date +%H:%M)"
+        else
+            echo " ${BATTERY}"
+        fi
+
     else
-        echo -e "$battery"
+
+        INDICATOR=" "
+        if [[ "${BATTERY}" -lt 25 ]]
+        then
+            INDICATOR=" "
+        elif [[ "${STATUS}" -lt 50 ]]
+        then
+            INDICATOR=" "
+        fi
+
+        echo "${INDICATOR} ${BATTERY}"
     fi
 }
 
 kernel_release() {
-    kernel_release="$(uname -r)"
-    echo -e "$kernel_release"
+    local KERNEL_RELEASE=" $(uname -r | sed 's/arch/linux/')"
+    echo "${KERNEL_RELEASE}"
+}
+
+keyboard_battery() {
+    KEYBOARD_ON=$(upower -i /org/freedesktop/UPower/devices/keyboard_hid_dco2co26of8oebob9_battery | grep model)
+
+    if [[ "${?}" -ne 0 ]]
+    then
+        exit 1
+    fi
+
+    KEYBATT=$(upower -i /org/freedesktop/UPower/devices/keyboard_hid_dco2co26of8oebob9_battery | awk '/percentage/ {print substr($2, 0, 2)}')
+
+    if [[ "${KEYBATT}" -le 15 ]]
+    then
+        notify-send -u critical -t 5000 " Keyboard Batteries Low (${KEYBATT}%)" "Recharge the batteries soon."
+    fi
 }
 
 statusbar() {
-    statusbar="$(mem) | $(kernel_release) | <username> | $(battery)% $(datetime) "
-    echo -e "$statusbar"
+    local STATUSBAR="$(mem) $(kernel_release)  Parma $(battery)% $(datetime) "
+    echo "${STATUSBAR}"
 }
 
 # Statusbar loop
-while true; do
+while [[ true ]]
+do
     xsetroot -name " $(statusbar)"
+    keyboard_battery
     sleep 1m
 done &
 
 # Wallpaper
-# feh --bg-fill <wallpaper-path>
-# feh --bg-fill <wallpaper-path>
-
-# Export something
-# export BROWSER=/usr/bin/google-chrome-stable
-# export EDITOR=nvim
+feh --bg-fill ~/Pictures/Wallpapers/alexandra-nicolae-MKXyRm-pK50-unsplash.jpg
+# feh --bg-fill ~/Riza/wallpapers_dwt1/0305.jpg
 
 # deleted command
 # remove dbus-launch 
 
-# Autostart picom compositor
-# <path>
-
-# Run dwm
+# execute dwm
 exec dwm
