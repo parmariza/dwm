@@ -11,16 +11,17 @@ Some patches for dwm (special thanks): [dwm patch - suckless.org](https://dwm.su
 Images
 ------
 ![](images/image1.png)
-wallpaper source: [click here for wallpaper](https://unsplash.com/photos/MKXyRm-pK50)
-
-![](images/image3.png)
-dmenu: [suckless - dmenu](https://tools.suckless.org/dmenu/)
+wallpaper source: [click here for wallpaper](https://unsplash.com/photos/KL98S4b33rI)
 
 ![](images/image2.png)
-text editor: [doom emacs](https://github.com/hlissner/doom-emacs)
+dmenu: [suckless - dmenu](https://tools.suckless.org/dmenu/)
+
+![](images/image3.png)
+Statistical data visualization: [seaborn](https://github.com/mwaskom/seaborn)
+png viewer: [sxiv](https://github.com/muennich/sxiv)
 
 ![](images/image4.png)
-file manager: [thunar](https://docs.xfce.org/xfce/thunar/start)
+text editor: [doom emacs](https://github.com/hlissner/doom-emacs)
 
 Requirements
 ------------

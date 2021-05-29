@@ -1,8 +1,5 @@
 /* See LICENSE file for copyright and license */
 
-/* imports */
-#include <X11/XF86keysym.h>
-
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -14,21 +11,21 @@ static const int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "MesloLGM Nerd Font:size=9" };
-static const char dmenufont[]       = "MesloLGS NF:size=10";
-static const char col_gray1[]       = "#222222";
+static const char dmenufont[]       = "MesloLGM Nerd Font:size=10";
+static const char col_gray1[]       = "#222222";    /* top bar color */
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#056b19";    /* # top bar color # default is blue (#05386b) */
-static const char col_border[]      = "#39cc6f";
+static const char col_cyan[]        = "#336e7b";    /* # top bar color # default is blue (#05386b) orange (#e26a36) */
+static const char col_border[]      = "#52b3d9";    /* # applications border (#5ebfad); orange (#ff7f50)*/
 static const char col_border2[]     = "#939597";
-static const char dmenu_color[]     = "#805442";    /* # dmenu color # default is green (#2ba64c) */
+static const char dmenu_color[]     = "#4682b4";    /* # dmenu color # default is green (#2ba64c) purple (#6a638f) */
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][4]      = {
-	/*               fg         bg         border       float */
+	/*               fg         bg         border         float */
 	[SchemeNorm] = { col_gray3, col_gray1, col_border2,   col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_border,  col_cyan },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_border,    col_border },
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg        border     */
@@ -84,11 +81,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 /* static const char *dmenucmd[] = { "dmenu_run", "-c", "-g", "3", "-l", "9", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-g", "3", "-l", "9", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", dmenu_color, "-sf", col_gray4, NULL };
+static const char *window_switcher[] = { "new_switch", NULL };
+static const char *dmenu_search[] = { "dmenu_websearch", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 /* brightness control */
-static const char *brightnessup[] = { "brightnessctl", "set", "2%+", NULL };
-static const char *brightnessdown[] = { "brightnessctl", "--min-value=100", "set", "2%-", NULL };
+static const char *brightnessup[] = { "brightnessctl", "set", "1%+", NULL };
+static const char *brightnessdown[] = { "brightnessctl", "--min-value=100", "set", "1%-", NULL };
 
 /* volume control */
 static const char *volumeup[] = { "pamixer", "--unmute", "--increase", "4", NULL };
@@ -96,18 +95,20 @@ static const char *volumedown[] = { "pamixer", "--decrease", "4", NULL };
 static const char *volumemute[] = { "pamixer", "--toggle-mute", NULL };
 
 /* redshift warm color */
-static const char *warm_inc[] = { "redshift", "-O", "5000K", NULL };
+static const char *warm_increase[] = { "redshift", "-O", "5000K", NULL };
 static const char *warm_off[] = { "redshift", "-x", NULL };
 
 /* custom shorcut commands */
-static const char screencapture[] = "scrot -q 100 ~/Pictures/Screencapture/%Y-%m-%d-%H.%M-screenshot.png";
+static const char all_screencapture[] = "scrot -q 100 ~/Pictures/Screencapture/%Y-%m-%d-%H.%M-screenshot.png";
+static const char select_screencapture[] = "scrot -q 100 -s -f ~/Pictures/Screencapture/%Y-%m-%d-%H.%M-screenshot.png";
 static const char *file_manager[] = { "thunar", NULL };
 static const char *qb[] = { "qutebrowser", NULL };
 static const char *emacs[] = { "emacs", NULL };
 static const char *pavucontrol[] = { "pavucontrol", NULL };
 
 /* nextprev tags */
-#include "nextprevtag.c"
+/* #include "nextprevtag.c" */
+#include "shiftview.c"
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -120,6 +121,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+
 	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
@@ -136,6 +138,7 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
+
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -150,8 +153,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ Mod4Mask,                     XK_n,      view_adjacent,  { .i = +1 } },
-	{ Mod4Mask,                     XK_b,      view_adjacent,  { .i = -1 } },
+
+    /* shift view */
+	{ Mod4Mask,                     XK_n,      shiftview,   { .i = +1 } },
+	{ Mod4Mask,                     XK_b,      shiftview,   { .i = -1 } },
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -162,14 +168,19 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY|ShiftMask,    			XK_End,    spawn,          SHCMD(screencapture) },
+
+    /* custom keys */
+	{ MODKEY,                       XK_u,      spawn,          {.v = window_switcher } },
+	{ MODKEY,                       XK_s,      spawn,          {.v = dmenu_search } },
+	{ MODKEY|ShiftMask,    			XK_End,    spawn,          SHCMD(all_screencapture) },
+	{ Mod4Mask|ShiftMask,			XK_End,    spawn,          SHCMD(select_screencapture) },
     { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = file_manager } },
 	{ MODKEY|ShiftMask, 			XK_e,	   spawn,		   {.v = emacs } },
     { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = qb } },
     { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = pavucontrol } },
 	{ 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = brightnessup } },
 	{ 0,          XF86XK_MonBrightnessDown,    spawn,          {.v = brightnessdown } },
-	{ ShiftMask,  XF86XK_MonBrightnessUp,      spawn,          {.v = warm_inc } },
+	{ ShiftMask,  XF86XK_MonBrightnessUp,      spawn,          {.v = warm_increase } },
 	{ ShiftMask,  XF86XK_MonBrightnessDown,    spawn,          {.v = warm_off } },
 	{ 0,          XF86XK_AudioRaiseVolume,     spawn,          {.v = volumeup } },
 	{ 0,          XF86XK_AudioLowerVolume,     spawn,          {.v = volumedown } },
@@ -191,7 +202,8 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-	{ ClkTagBar,            0,              Button4,        view_adjacent,  { .i = -1 } },
-	{ ClkTagBar,            0,              Button5,        view_adjacent,  { .i = +1 } },
+
+	{ ClkTagBar,		    0,		        Button4,	    shiftview,	    {.i = -1} },
+	{ ClkTagBar,		    0,		        Button5,	    shiftview,     	{.i = +1} },
 };
 

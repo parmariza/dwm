@@ -4,8 +4,8 @@ export AWT_TOOLKIT=MToolkit
 # wmname LG3D
 
 datetime() {
-    local DATETIME="$(date +"%a %b %d %H:%M")"
-    echo " ${DATETIME}"
+    local DATETIME="$(date +" %a %b %d  %H:%M")"
+    echo "${DATETIME}"
 }
 
 mem() {
@@ -22,36 +22,79 @@ battery() {
 
         if [[ "${BATTERY}" -le 15 ]]
         then
-            echo "Battery Very Low, Warning:  ${BATTERY}"
+            echo "Battery Very Low, Warning:   ${BATTERY}"
             notify-send -u critical -t 15000 " Battery under 15%" "You need to plug the power adapter into your computer"
         else
-            echo "Warning:  ${BATTERY}"
+            echo "Warning:   ${BATTERY}"
             notify-send " Battery under 25%"
         fi
 
     elif [[ "${STATUS}" = 'Charging' ]]
     then
 
-        if [[ "$BATTERY" -ge 94 ]]
+        if [[ "${BATTERY}" -le 30 ]]
         then
-            echo " ${BATTERY}"
+            local CHARGE_ICON=''
+        elif [[ "${BATTERY}" -le 50  ]]
+        then
+            local CHARGE_ICON=''
+        elif [[ "${BATTERY}" -le 70 ]]
+        then
+            local CHARGE_ICON=''
+        elif [[ "${BATTERY}" -lt 94 ]]
+        then
+            local CHARGE_ICON=''
+        elif [[ "${BATTERY}" -ge 94 ]]
+        then
+            local CHARGE_ICON=''
             notify-send -u low  -t 15000 " Fully Charged" "Today at $(date +%H:%M)"
-        else
-            echo " ${BATTERY}"
         fi
+
+        echo "${CHARGE_ICON} ${BATTERY}"
 
     else
 
-        INDICATOR=" "
-        if [[ "${BATTERY}" -lt 25 ]]
+        local CHARGE_ICON=' '
+    
+        if [[ "${BATTERY}" -le 35 ]] && [[ "${BATTERY}" -gt 25 ]]
         then
-            INDICATOR=" "
-        elif [[ "${STATUS}" -lt 50 ]]
+            local CHARGE_ICON=' '
+        elif [[ "${BATTERY}" -le 65 ]]
         then
-            INDICATOR=" "
+            local CHARGE_ICON=' '
+        elif [[ "${BATTERY}" -le 85 ]]
+        then
+            local CHARGE_ICON=' '
         fi
 
-        echo "${INDICATOR} ${BATTERY}"
+        echo "${CHARGE_ICON} ${BATTERY}"
+    fi
+}
+
+get_volume() {
+    local GET_VOL=$(pamixer --get-volume)
+    local IS_MUTE=$(pamixer --get-mute)
+
+    if [[ "${IS_MUTE}" = 'false' ]]
+    then
+
+        if [[ "${GET_VOL}" -le 30 ]]
+        then
+            local VOL_ICON=' '
+        elif [[ "${GET_VOL}" -le 75 ]]
+        then
+             local VOL_ICON='墳 '
+        elif [[ "${GET_VOL}" -gt 75 ]]
+        then
+            local VOL_ICON=' '
+        fi
+
+        echo "${VOL_ICON}${GET_VOL}%"
+
+    else
+        local VOL_ICON='婢 '
+        local GET_VOL='muted'
+        echo "${VOL_ICON}${GET_VOL}"
     fi
 }
 
@@ -63,21 +106,20 @@ kernel_release() {
 keyboard_battery() {
     KEYBOARD_ON=$(upower -i /org/freedesktop/UPower/devices/keyboard_hid_dco2co26of8oebob9_battery | grep model)
 
-    if [[ "${?}" -ne 0 ]]
+    if [[ "${?}" -eq 0 ]]
     then
-        exit 1
-    fi
-
     KEYBATT=$(upower -i /org/freedesktop/UPower/devices/keyboard_hid_dco2co26of8oebob9_battery | awk '/percentage/ {print substr($2, 0, 2)}')
 
-    if [[ "${KEYBATT}" -le 15 ]]
-    then
-        notify-send -u critical -t 5000 " Keyboard Batteries Low (${KEYBATT}%)" "Recharge the batteries soon."
+        if [[ "${KEYBATT}" -le 15 ]]
+        then
+            notify-send -u critical -t 5000 " Keyboard Batteries Low (${KEYBATT}%)" "Recharge the batteries soon."
+        fi
     fi
 }
 
+
 statusbar() {
-    local STATUSBAR="$(mem) $(kernel_release)  Parma $(battery)% $(datetime) "
+    local STATUSBAR="$(mem) $(kernel_release)  NAME $(battery)% $(get_volume) $(datetime) "
     echo "${STATUSBAR}"
 }
 
@@ -85,15 +127,15 @@ statusbar() {
 while [[ true ]]
 do
     xsetroot -name " $(statusbar)"
-    keyboard_battery
+    # keyboard_battery
     sleep 1m
 done &
 
 # Wallpaper
-feh --bg-fill ~/Pictures/Wallpapers/alexandra-nicolae-MKXyRm-pK50-unsplash.jpg
+# feh --bg-fill ~/Pictures/Wallpapers/christopher-padilla-KL98S4b33rI-unsplash.jpg
 # feh --bg-fill ~/Riza/wallpapers_dwt1/0305.jpg
 
-# deleted command
+# commented command
 # remove dbus-launch 
 
 # execute dwm
