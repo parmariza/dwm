@@ -17,8 +17,8 @@ wallpaper source: [click here for wallpaper](https://unsplash.com/photos/KL98S4b
 dmenu: [suckless - dmenu](https://tools.suckless.org/dmenu/)
 
 ![](images/image3.png)
-Statistical data visualization: [seaborn](https://github.com/mwaskom/seaborn)
-png viewer: [sxiv](https://github.com/muennich/sxiv)
+- Statistical data visualization: [seaborn](https://github.com/mwaskom/seaborn)
+- png viewer: [sxiv](https://github.com/muennich/sxiv)
 
 ![](images/image4.png)
 text editor: [doom emacs](https://github.com/hlissner/doom-emacs)
